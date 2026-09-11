@@ -439,6 +439,11 @@ function draw() {
         // check collision
         const pxFront = Math.round(players[player].x + mathCos(players[player].dir) * hitboxSize * players[player].powerup.size)
         const pyFront = Math.round(players[player].y + mathSin(players[player].dir) * hitboxSize * players[player].powerup.size)
+
+        // robot variant
+        const pxFrontR = Math.round(players[player].x + 1.1 * mathCos(players[player].dir) * hitboxSize * players[player].powerup.size)
+        const pyFrontR = Math.round(players[player].y + 1.1 * mathSin(players[player].dir) * hitboxSize * players[player].powerup.size)
+
         const pxFront2 = Math.round(players[player].x + mathCos(players[player].dir))
         const pyFront2 = Math.round(players[player].y + mathSin(players[player].dir))
         const pxLeft = Math.round(players[player].x + mathCos(players[player].dir - r2d(55)) * hitboxSize * players[player].powerup.size)
@@ -448,6 +453,10 @@ function draw() {
 
         const imgDataFrontTH = ctxTH.getImageData(pxFront, pyFront, 1, 1).data
         const imgDataFrontPH = ctxPH.getImageData(pxFront, pyFront, 1, 1).data
+
+        // robot variant
+        const imgDataFrontTHR = ctxTH.getImageData(pxFrontR, pyFrontR, 1, 1).data
+
         const imgDataFront2TH = ctxTH.getImageData(pxFront2, pyFront2, 1, 1).data
         const imgDataFront2PH = ctxPH.getImageData(pxFront2, pyFront2, 1, 1).data
         const imgDataLeftTH = ctxTH.getImageData(pxLeft, pyLeft, 1, 1).data
@@ -494,7 +503,7 @@ function draw() {
                         continue
                     }
                 } else {
-                    if (imgDataFrontTH[3] == 255) {
+                    if (imgDataFrontTHR[3] == 255) {
                         // if robot only check alpha value of front
                         givePoints(players[player])
                         continue
