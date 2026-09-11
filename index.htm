@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Achtung, die Kurve!</title>
+        <link rel="stylesheet" href="achtung_files/style_VxhQ.css" class="native-dark-class-original"><style lang="en" type="text/css" native-dark-index="0" class="native-dark-class-cloned">*,
+body {
+    letter-spacing: 0.06vw;
+    font-family: "Sarabun", sans-serif;
+    box-sizing: border-box;
+    color: var(--board-color);
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+:root {
+    --blue: rgb(0, 0, 255);
+    --blue-t: rgba(0, 0, 255, 0);
+    --yellow: rgb(255, 255, 0);
+    --fred: rgb(255, 0, 0);
+    --fred-t: rgba(255, 0, 0, 0);
+    --greenlee: rgb(0, 255, 0);
+    --greenlee-t: rgba(0, 255, 0, 0);
+    --pinkney: rgb(255, 0, 255);
+    --bluebell: rgb(0, 255, 255);
+    --willem: rgb(255, 127, 0);
+    --greydon: rgb(200, 200, 200);
+}
+
+#game_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111111;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#game {
+    display: grid;
+    width: 100%;
+    max-width: calc(100vh * 4 / 3);
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background-color: #000;
+}
+
+#mobile_title {
+    display: none;
+    color: var(--yellow);
+    font-size: 3em;
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    #game {
+        display: none;
+    }
+    #mobile_title {
+        display: block;
+    }
+}
+
+#start_page {
+    background-color: #000;
+    grid-column: 1;
+    grid-row: 1;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    z-index: 6;
+    overflow-y: auto;
+}
+
+canvas {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    cursor: none;
+}
+
+#powerup_hitbox_canvas {
+    z-index: 1;
+    display: none;
+}
+
+#powerup_visual_canvas {
+    z-index: 2;
+}
+
+#trails_hitbox_canvas {
+    z-index: 3;
+}
+
+#dots_canvas {
+    z-index: 4;
+}
+
+#ui_canvas {
+    z-index: 5;
+}
+
+#game_title {
+    text-align: center;
+    color: var(--yellow);
+    margin: 40px 0;
+}
+
+#player_grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 100px;
+}
+
+.player_wrapper,
+.player_wrapper_start {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 30% 30% 30%;
+    margin: 0;
+    background-color: #000;
+    border: none;
+    text-align: left;
+    opacity: 0.5;
+}
+
+.player_wrapper p {
+    font-size: 35px;
+    line-height: 1.7;
+    cursor: pointer;
+}
+
+.player_wrapper.focus,
+.player_wrapper.focus:hover {
+    opacity: 1;
+}
+
+.player_wrapper:hover {
+    opacity: 0.85;
+}
+
+.player_wrapper_start p {
+    color: #fff;
+    opacity: 1;
+    font-size: 35px;
+    line-height: 1.7;
+}
+
+.key_wrapper {
+    display: grid;
+}
+
+.key_wrapper p {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.key_wrapper p:first-child {
+    color: #fff;
+    font-size: 20px;
+    padding: 10px 0 12px 0;
+    margin: 0 30px;
+    border: 2px solid #fff;
+    border-radius: 6px;
+}
+
+#gamemode_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#gamemode_wrapper p {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+}
+
+#start_game_button_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#start_game_button {
+    background-color: #6d6d6d;
+    border: 2px solid #ffffff;
+    text-align: center;
+    font-size: 100%;
+    color: #ffffff;
+    padding: 10px 18px 13px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin: 20px;
+}
+
+#start_game_button:hover {
+    background-color: #999999;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.text_center {
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.fred {
+    color: var(--fred);
+}
+
+.greenlee {
+    color: var(--greenlee);
+}
+
+.pinkney {
+    color: var(--pinkney);
+}
+
+.bluebell {
+    color: var(--bluebell);
+}
+
+.willem {
+    color: var(--willem);
+}
+
+.greydon {
+    color: var(--greydon);
+}
+</style>
+        <script src="achtung_files/script_VxhQ.js" defer="defer"></script>
+        <script src="achtung_files/drawicons_VxhQ.js" defer="defer"></script>
+        <script src="achtung_files/buildstartpage_VxhQ.js" defer="defer"></script>
+        <script src="achtung_files/startpage_VxhQ.js" defer="defer"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com/">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+        <link href="achtung_files/css2_VxhQ.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="https://achtung.life/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://achtung.life/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://achtung.life/favicon/favicon-16x16.png">
+        <link rel="manifest" href="https://achtung.life/favicon/site.webmanifest">
+    <link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><style lang="en" type="text/css" id="dark-mode-custom-style"></style><style lang="en" type="text/css" id="dark-mode-native-style"></style><style lang="en" type="text/css" id="dark-mode-native-sheet"></style></head>
+
+    <body>
+        <div id="wrapper">
+            <div id="game_container">
+                <div id="game">
+                    <div id="start_page"></div>
+                    <canvas id="powerup_hitbox_canvas" width="596" height="447"></canvas>
+                    <canvas id="powerup_visual_canvas" width="596" height="447"></canvas>
+                    <canvas id="trails_hitbox_canvas" width="596" height="447"></canvas>
+                    <canvas id="dots_canvas" width="596" height="447"></canvas>
+                    <canvas id="ui_canvas" width="596" height="447"></canvas>
+                </div>
+                <h1 id="mobile_title">You can only play "Achtung die Kurve" on a PC with a keyboard</h1>
+            </div>
+        </div>
+    
+
+</body></html>
